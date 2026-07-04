@@ -8,10 +8,13 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<LennyDbContext>(options
  => options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
+builder.Services.AddScoped<IPicRepository, PicRepository>();
+
 builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors();
 
 var app = builder.Build();
-
 
 
 // Configure the HTTP request pipeline.
@@ -22,30 +25,25 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(p=> p.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .AllowAnyMethod());
+
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/pics", (IPicRepository picRepository) =>
+    picRepository.GetAll()).Produces<List<PicDto>>(StatusCodes.Status200OK);
+
+app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    var result = await picRepository.Get(id);
+    if (result == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(result);
+});
+
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

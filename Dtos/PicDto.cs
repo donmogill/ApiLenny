@@ -1,0 +1,1 @@
+public record PicDto(int Id, string Filename, int DisplayOrder);
