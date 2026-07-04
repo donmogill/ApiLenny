@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj": {}
+    "C:\\Users\\thedo\\source\\repos\\React and web Api\\lenny\\Api\\Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj": {
+    "C:\\Users\\thedo\\source\\repos\\React and web Api\\lenny\\Api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+        "projectUniqueName": "C:\\Users\\thedo\\source\\repos\\React and web Api\\lenny\\Api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+        "projectPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\lenny\\Api\\Api.csproj",
         "packagesPath": "C:\\Users\\thedo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\obj\\",
+        "outputPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\lenny\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -55,6 +55,20 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[10.0.9, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[10.2.3, )"
             }
           },
           "imports": [
