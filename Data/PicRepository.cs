@@ -42,7 +42,7 @@ public class PicRepository : IPicRepository
         {
             return null;
         }
-        return null;
+        return new PicDto(e.Id, e.Filename, e.DisplayOrder);
     }
 
     public async Task<List<PicDto>> GetAll()
