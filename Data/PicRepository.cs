@@ -15,7 +15,7 @@ public class PicRepository : IPicRepository
         var entity = new PicEntity
         {
             Filename = pic.Filename,
-            DisplayOrder = pic.DisplayOrder
+            DisplayOrder = new PicService(this).GetNextDisplayOrder()
         };
         _context.Pics.Add(entity);
         await _context.SaveChangesAsync();
@@ -51,6 +51,11 @@ public class PicRepository : IPicRepository
             .OrderBy(p => p.DisplayOrder)
             .Select(p => new PicDto(p.Id, p.Filename, p.DisplayOrder))
             .ToListAsync();
+    }
+
+    public Task<List<PicEntity>> GetAllSync()
+    {
+        return _context.Pics.ToListAsync();
     }
 
     public Task<PicDto> Update(PicDto pic)

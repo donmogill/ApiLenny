@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using MiniValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,9 +49,14 @@ app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository) =>
 
 app.MapPost("/pics", async ([FromBody] PicDto dto, IPicRepository picRepository) =>
 {
+    if (!MiniValidator.TryValidate(dto, out var errors))
+    {
+        return Results.ValidationProblem(errors);
+    }
+
     var result = picRepository.Add(dto);
     return Results.Created($"/pic/{dto.Id}", result);
-}).Produces<PicDto>(StatusCodes.Status201Created);
+}).ProducesValidationProblem().Produces<PicDto>(StatusCodes.Status201Created);
 
 app.MapPut("/pics/{id:int}", async (int id, [FromBody] PicDto dto, IPicRepository picRepository) =>
 {
