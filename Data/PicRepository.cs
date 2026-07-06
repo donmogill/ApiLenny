@@ -9,24 +9,40 @@ public class PicRepository : IPicRepository
         _context = context;
     }
 
-    public Task<List<PicDto>> Add(PicDto pic)
+    public async Task<PicDto> Add(PicDto pic)
     {
-        throw new NotImplementedException();
+        // mapping plugin?
+        var entity = new PicEntity
+        {
+            Filename = pic.Filename,
+            DisplayOrder = pic.DisplayOrder
+        };
+        _context.Pics.Add(entity);
+        await _context.SaveChangesAsync();
+
+        return new PicDto(entity.Id, entity.Filename, entity.DisplayOrder);
     }
 
-    public Task<List<PicDto>> Delete(int id)
+    public async Task<PicDto> Delete(int id)
     {
-        throw new NotImplementedException();
+        var entity = await _context.Pics.SingleOrDefaultAsync(p => p.Id == id);
+        if (entity == null)
+        {
+            throw new ArgumentException($"Trying to delete pic: entity with ID {id} not found.");
+        }
+        _context.Pics.Remove(entity);
+        await _context.SaveChangesAsync();
+        return new PicDto(entity.Id, entity.Filename, entity.DisplayOrder);
     }
 
-    public async Task<List<PicDto>> Get(int id)
+    public async Task<PicDto> Get(int id)
     {
         var e = await _context.Pics.SingleOrDefaultAsync(p => p.Id == id);
         if (e == null)
         {
             return null;
         }
-        return new List<PicDto> { new PicDto(e.Id, e.Filename, e.DisplayOrder) };
+        return null;
     }
 
     public async Task<List<PicDto>> GetAll()
@@ -37,7 +53,7 @@ public class PicRepository : IPicRepository
             .ToListAsync();
     }
 
-    public Task<List<PicDto>> Update(PicDto pic)
+    public Task<PicDto> Update(PicDto pic)
     {
         throw new NotImplementedException();
     }

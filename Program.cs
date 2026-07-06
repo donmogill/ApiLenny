@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,5 +46,39 @@ app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository) =>
     return Results.Ok(result);
 });
 
+app.MapPost("/pics", async ([FromBody] PicDto dto, IPicRepository picRepository) =>
+{
+    var result = picRepository.Add(dto);
+    return Results.Created($"/pic/{dto.Id}", result);
+}).Produces<PicDto>(StatusCodes.Status201Created);
+
+app.MapPut("/pics/{id:int}", async (int id, [FromBody] PicDto dto, IPicRepository picRepository) =>
+{
+    if (await picRepository.Get(id) == null)
+    {
+        return Results.NotFound();
+    }
+    var result = picRepository.Update(dto);
+    if (result == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(result);
+}).Produces<PicDto>(StatusCodes.Status200OK);
+
+app.MapDelete("/pics/{id:int}", async (int id, IPicRepository picRepository) =>
+{
+    if (await picRepository.Get(id) == null)
+    {
+        return Results.Problem($"Pic with id {id} not found", 
+            statusCode: StatusCodes.Status404NotFound);
+    }
+    var result = picRepository.Delete(id);
+    if (result == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(result);    
+}).ProducesProblem(404).Produces(StatusCodes.Status200OK);   
 
 app.Run();

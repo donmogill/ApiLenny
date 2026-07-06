@@ -1,8 +1,8 @@
 public interface IPicRepository
 {
     Task<List<PicDto>> GetAll();
-    Task<List<PicDto>> Get(int id);
-    Task<List<PicDto>> Add(PicDto pic);
-    Task<List<PicDto>> Update(PicDto pic);
-    Task<List<PicDto>> Delete(int id);
+    Task<PicDto> Get(int id);
+    Task<PicDto> Add(PicDto pic);
+    Task<PicDto> Update(PicDto pic);
+    Task<PicDto> Delete(int id);
 }
