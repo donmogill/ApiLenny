@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
 
 public class PicRepository : IPicRepository
 {
@@ -61,5 +65,6 @@ public class PicRepository : IPicRepository
     public Task<PicDto> Update(PicDto pic)
     {
         throw new NotImplementedException();
-    }
+    }   
+    
 }

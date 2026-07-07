@@ -12,12 +12,14 @@ builder.Services.AddDbContext<LennyDbContext>(options
 
 builder.Services.AddScoped<IPicRepository, PicRepository>();
 
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();
 
 var app = builder.Build();
 
+app.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,6 +49,7 @@ app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository) =>
     return Results.Ok(result);
 });
 
+/*
 app.MapPost("/pics", async ([FromBody] PicDto dto, IPicRepository picRepository) =>
 {
     if (!MiniValidator.TryValidate(dto, out var errors))
@@ -57,6 +60,15 @@ app.MapPost("/pics", async ([FromBody] PicDto dto, IPicRepository picRepository)
     var result = picRepository.Add(dto);
     return Results.Created($"/pic/{dto.Id}", result);
 }).ProducesValidationProblem().Produces<PicDto>(StatusCodes.Status201Created);
+*/
+
+app.MapPost("/upload", async ([FromBody]IFormFile file) =>
+{
+    
+    //var result = picRepository.UploadFile(file);
+    //return Results.Created($"/pics", result);
+}).DisableAntiforgery();
+
 
 app.MapPut("/pics/{id:int}", async (int id, [FromBody] PicDto dto, IPicRepository picRepository) =>
 {
