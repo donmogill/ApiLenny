@@ -154,3 +154,8 @@ C:\Users\thedo\source\repos\React and web Api\lenny\Api\bin\Debug\net10.0\packag
 C:\Users\thedo\source\repos\React and web Api\lenny\Api\bin\Debug\net10.0\package.json
 C:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\MiniValidation.dll
 C:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\Api.staticwebassets.runtime.json
+c:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\AutoMapper.dll
+c:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+c:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+c:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+c:\Users\thedo\source\repos\React and web Api\Lenny\Api\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll

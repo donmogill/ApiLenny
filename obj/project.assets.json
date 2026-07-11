@@ -3105,12 +3105,12 @@
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "AutoMapper >= 16.2.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.9",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.9",
       "Microsoft.EntityFrameworkCore.Sqlite >= 10.0.9",
       "MiniValidation >= 0.10.0",
-      "Swashbuckle.AspNetCore >= 10.2.3",
-      "automapper >= 16.2.0"
+      "Swashbuckle.AspNetCore >= 10.2.3"
     ]
   },
   "packageFolders": {
@@ -3120,11 +3120,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "projectUniqueName": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "projectPath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "packagesPath": "C:\\Users\\thedo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\obj\\",
+      "outputPath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3165,6 +3165,10 @@
         "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[16.2.0, )"
+          },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
             "version": "[10.0.9, )"
@@ -3186,10 +3190,6 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[10.2.3, )"
-          },
-          "automapper": {
-            "target": "Package",
-            "version": "[16.2.0, )"
           }
         },
         "imports": [

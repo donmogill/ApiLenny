@@ -1,23 +1,29 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
-using System.IO;
-using System.Threading.Tasks;
+using AutoMapper;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ShowController : ControllerBase
 {
     readonly private IShowRepository _showRepository;
-    public ShowController(IShowRepository showRepository)
+    readonly private IMapper _mapper;
+    public ShowController(IShowRepository showRepository, IMapper mapper)
     {
-        _showRepository = showRepository;
+        _showRepository = showRepository ??
+            throw new ArgumentNullException(nameof(showRepository));
+
+        _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
+
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowDto>>> Get()
     {
-        return Ok(await _showRepository.GetAll());
+        var showEntities = await _showRepository.GetAll();
+
+        var result = _mapper.Map<IEnumerable<ShowDto>>(showEntities);
+        return Ok(result);
     }
     
 }
