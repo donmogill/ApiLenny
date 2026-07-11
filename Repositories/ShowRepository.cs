@@ -16,5 +16,16 @@ public class ShowRepository : IShowRepository
         .ToListAsync();
     }
 
+    public async Task AddShow(ShowEntity showEntity)
+    {
+        _context.Add(showEntity);              
+    }
+
+    public async Task<bool> SaveChangesAsync()
+    {
+        return (await _context.SaveChangesAsync() >= 0);
+    }
+
+
 
 }

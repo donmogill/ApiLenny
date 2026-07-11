@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using SQLitePCL;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/shows")]
 public class ShowController : ControllerBase
 {
     readonly private IShowRepository _showRepository;
@@ -24,6 +25,17 @@ public class ShowController : ControllerBase
 
         var result = _mapper.Map<IEnumerable<ShowDto>>(showEntities);
         return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<ShowDto>> Add(ShowDto showDto)
+    {
+        if (showDto == null)
+            return NotFound();
+            
+        await _showRepository.AddShow(_mapper.Map<ShowEntity>(showDto));
+        await _showRepository.SaveChangesAsync();
+        return Ok(showDto);
     }
     
 }

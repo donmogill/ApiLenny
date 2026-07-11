@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3ghS3ro5vnM=",
+  "dgSpecHash": "vjZr8oBxVEc=",
   "success": true,
-  "projectFilePath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thedo\\.nuget\\packages\\automapper\\16.2.0\\automapper.16.2.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -54,9 +54,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "projectPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "filePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         "net10.0"
