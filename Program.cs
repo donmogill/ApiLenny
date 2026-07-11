@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using MiniValidation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +10,17 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<LennyDbContext>(options
  => options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
+builder.Services.AddControllers(options =>
+{
+    options.ReturnHttpNotAcceptable = true;
+});
+
 builder.Services.AddScoped<IPicRepository, PicRepository>();
 builder.Services.AddScoped<IShowRepository, ShowRepository>();
 
-builder.Services.AddControllers();
+builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly));
+
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors();

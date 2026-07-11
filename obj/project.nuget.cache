@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+uIXjnnHgI8=",
+  "dgSpecHash": "/ILB7kZdjAA=",
   "success": true,
-  "projectFilePath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\thedo\\.nuget\\packages\\automapper\\16.2.0\\automapper.16.2.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.9\\microsoft.aspnetcore.openapi.10.0.9.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.build.framework\\18.0.2\\microsoft.build.framework.18.0.2.nupkg.sha512",
@@ -23,6 +24,10 @@
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.entityframeworkcore.sqlite.core\\10.0.9\\microsoft.entityframeworkcore.sqlite.core.10.0.9.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.extensions.apidescription.server\\10.0.0\\microsoft.extensions.apidescription.server.10.0.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.extensions.dependencymodel\\10.0.9\\microsoft.extensions.dependencymodel.10.0.9.nupkg.sha512",
+    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.identitymodel.abstractions\\8.14.0\\microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.14.0\\microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.identitymodel.logging\\8.14.0\\microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.14.0\\microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.openapi\\2.7.5\\microsoft.openapi.2.7.5.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\microsoft.visualstudio.solutionpersistence\\1.0.52\\microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\minivalidation\\0.10.0\\minivalidation.0.10.0.nupkg.sha512",
@@ -49,9 +54,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.11 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "projectPath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "warningLevel": 1,
-      "filePath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+      "filePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         "net10.0"
