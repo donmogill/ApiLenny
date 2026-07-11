@@ -8,7 +8,7 @@ public class ShowRepository : IShowRepository
         _context = context;       
     }
 
-    public async Task<List<ShowEntity>> GetAll()
+    public async Task<IEnumerable<ShowEntity>> GetAll()
     {
         return await _context.Shows
         .Include(v => v.Venue)

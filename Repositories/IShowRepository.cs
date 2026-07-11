@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 public interface IShowRepository
 {
-    Task<List<ShowEntity>> GetAll();
+    Task<IEnumerable<ShowEntity>> GetAll();
 }
