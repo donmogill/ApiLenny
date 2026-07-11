@@ -62,9 +62,18 @@ public class PicRepository : IPicRepository
         return _context.Pics.ToListAsync();
     }
 
-    public Task<PicDto> Update(PicDto pic)
+    public async Task<PicDto> Update(PicDto dto)
     {
-        throw new NotImplementedException();
-    }   
+        var entity = await _context.Pics.FindAsync(dto.Id);
+        if (entity == null)
+            throw new ArgumentException($"Trying to update pic: entity with ID {dto.Id} not found.");
+
+        entity.DisplayOrder = dto.DisplayOrder;    
+
+        _context.Entry(entity).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+
+        return dto;
+    }
     
 }

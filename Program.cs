@@ -11,6 +11,7 @@ builder.Services.AddDbContext<LennyDbContext>(options
  => options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
 builder.Services.AddScoped<IPicRepository, PicRepository>();
+builder.Services.AddScoped<IShowRepository, ShowRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
@@ -34,6 +35,8 @@ app.UseCors(p=> p.WithOrigins("http://localhost:3000")
     .AllowAnyMethod());
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 
 app.MapGet("/pics", (IPicRepository picRepository) =>

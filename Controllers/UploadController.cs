@@ -21,7 +21,7 @@ public class UploadController : ControllerBase
 
         var service = new UploadService(file);    
 
-        service.CopyFileToServer(service.CreateUploadsDirectory());
+        service.CopyFileToServer();
 
         await _picRepository.Add(new PicDto(0, file.FileName, 0));
 

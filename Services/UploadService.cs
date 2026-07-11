@@ -3,11 +3,13 @@ public class UploadService
     public string UploadPath { get; }
 
     private readonly IFormFile _file;
+    private string uploadsFolder;
 
     public UploadService(IFormFile file)
     {
         _file = file;
         UploadPath = $"/Uploads/{file.FileName}";
+        uploadsFolder = CreateUploadsDirectory();
     }
     public string CreateUploadsDirectory()
     {
@@ -18,7 +20,7 @@ public class UploadService
         return uploadsFolder;
 
     }
-    public async void CopyFileToServer(string uploadsFolder)
+    public async void CopyFileToServer()
     {
         var filePath = Path.Combine(uploadsFolder, _file.FileName);
 
