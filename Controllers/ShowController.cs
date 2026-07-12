@@ -28,14 +28,13 @@ public class ShowController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<ShowDto>> Add(ShowDto showDto)
-    {
-        if (showDto == null)
+    public async Task<ActionResult<ShowDto>> Add([FromBody]ShowDto dto)
+    {   
+        if (dto == null)
             return NotFound();
-            
-        await _showRepository.AddShow(_mapper.Map<ShowEntity>(showDto));
+        await _showRepository.AddShow(_mapper.Map<ShowEntity>(dto));
         await _showRepository.SaveChangesAsync();
-        return Ok(showDto);
-    }
-    
+        
+        return Ok(dto);
+    }    
 }

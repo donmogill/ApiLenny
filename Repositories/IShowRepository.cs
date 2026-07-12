@@ -4,4 +4,5 @@ public interface IShowRepository
     Task<bool> SaveChangesAsync();
     Task<IEnumerable<ShowEntity>> GetAll();
     Task AddShow(ShowEntity showEntity);
+    Task<IEnumerable<VenueEntity>> GetVenues();
 }

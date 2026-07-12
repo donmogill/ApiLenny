@@ -12,7 +12,7 @@ public class ShowRepository : IShowRepository
     {
         return await _context.Shows
         .Include(v => v.Venue)
-        .OrderBy(s => s.Date)
+        .OrderByDescending(s => s.Date)
         .ToListAsync();
     }
 
@@ -26,6 +26,12 @@ public class ShowRepository : IShowRepository
         return (await _context.SaveChangesAsync() >= 0);
     }
 
+    public async Task<IEnumerable<VenueEntity>> GetVenues()
+    {
+        return await _context.Venues
+        .OrderBy(v => v.Name)
+        .ToListAsync();
+    }
 
 
 }

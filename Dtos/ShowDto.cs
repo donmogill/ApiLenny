@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 public record ShowDto
 (
     int Id,
-    [property: Required] string BandName,
-    [property: Required] int VenueId,
-    VenueDto Venue,
-    [property: Required] DateOnly Date,
-    [property: Required] TimeOnly Time
+    string BandName,
+    int VenueId,
+    VenueDto? Venue,
+    DateOnly Date,
+    TimeOnly Time
 );
     
