@@ -36,7 +36,7 @@ public class ShowController : ControllerBase
             return NotFound();
         }
 
-        var result = _mapper.Map<IEnumerable<ShowDto>>(showEntities);
+        var result = _mapper.Map<ShowDto>(showEntities);
         return Ok(result);
     }
 
