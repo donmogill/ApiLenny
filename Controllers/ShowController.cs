@@ -27,6 +27,19 @@ public class ShowController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ShowDto>> Get(int id)
+    {
+        var showEntities = await _showRepository.Get(id);
+        if (showEntities == null)
+        {
+            return NotFound();
+        }
+
+        var result = _mapper.Map<IEnumerable<ShowDto>>(showEntities);
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<ActionResult<ShowDto>> Add([FromBody]ShowDto dto)
     {   
@@ -60,7 +73,7 @@ public class ShowController : ControllerBase
         var showEntity = await _showRepository.Get(showDto.Id);
         if (showEntity == null)
         {
-            return NotFound();
+            return NotFound("Show was not found in the database.");
         }
 
         _mapper.Map(showDto, showEntity);
