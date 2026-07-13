@@ -107,6 +107,23 @@ app.MapDelete("/pics/{id:int}", async (int id, IPicRepository picRepository) =>
         return Results.NotFound();
     }
     return Results.Ok(result);    
-}).ProducesProblem(404).Produces(StatusCodes.Status200OK);   
+}).ProducesProblem(404).Produces(StatusCodes.Status200OK); 
+
+app.MapDelete("/shows/{id:int}", async (int id, IShowRepository showRepository) =>
+{
+    var showEntity = await showRepository.Get(id);
+    if (showEntity == null)
+    {
+        return Results.Problem($"Show with id {id} not found", 
+            statusCode: StatusCodes.Status404NotFound);
+    }
+    var result = showRepository.Delete(showEntity);
+    await showRepository.SaveChangesAsync();
+    if (result == null)
+    {
+        return Results.NotFound();
+    }
+    return Results.Ok(result);    
+}).ProducesProblem(404).Produces(StatusCodes.Status200OK); 
 
 app.Run();

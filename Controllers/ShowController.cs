@@ -37,4 +37,36 @@ public class ShowController : ControllerBase
         
         return Ok(dto);
     }    
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var showEntity = await _showRepository.Get(id);
+
+        if (showEntity == null)
+        {
+            return NotFound();
+        }
+
+        await _showRepository.Delete(showEntity);
+        await _showRepository.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> UpdatePointOfInterest([FromBody]ShowDto showDto)
+    {
+        var showEntity = await _showRepository.Get(showDto.Id);
+        if (showEntity == null)
+        {
+            return NotFound();
+        }
+
+        _mapper.Map(showDto, showEntity);
+        await _showRepository.ForEditSaveChangesAsync(showEntity);
+
+        return NoContent();
+    } 
+           
 }
