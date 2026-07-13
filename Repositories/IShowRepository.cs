@@ -5,7 +5,11 @@ public interface IShowRepository
     Task<bool> ForEditSaveChangesAsync(ShowEntity showEntity);
     Task<IEnumerable<ShowEntity>> GetAll();
     Task AddShow(ShowEntity showEntity);
-    Task<IEnumerable<VenueEntity>> GetVenues();
     Task<ShowEntity> Get(int id);
     Task Delete(ShowEntity showEntity);
+
+    Task<IEnumerable<VenueEntity>> GetVenues();
+    Task<VenueEntity> GetVenue(int id);
+    Task AddVenue(VenueEntity venueEntity);
+    Task DeleteVenue(VenueEntity venueEntity);
 }

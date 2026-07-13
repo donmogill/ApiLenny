@@ -51,6 +51,21 @@ public class ShowRepository : IShowRepository
         .OrderBy(v => v.Name)
         .ToListAsync();
     }
+     public async Task<VenueEntity> GetVenue(int id)
+    {
+        return await _context.Venues
+        .Where(s=>s.Id == id)
+        .FirstAsync();
+    }
+   public async Task AddVenue(VenueEntity venueEntity)
+    {
+        _context.Venues.Add(venueEntity);              
+    }
+
+    public async Task DeleteVenue(VenueEntity venueEntity)
+    {
+        _context.Remove(venueEntity);
+    }
 
 
 }

@@ -24,4 +24,31 @@ public class VenueController : ControllerBase
         var result = _mapper.Map<IEnumerable<VenueDto>>(venueEntities);
         return Ok(result);
     }    
+
+    [HttpPost]
+    public async Task<ActionResult<VenueDto>> Add([FromBody]VenueDto dto)
+    {   
+        if (dto == null)
+            return NotFound();
+        await _showRepository.AddVenue(_mapper.Map<VenueEntity>(dto));
+        await _showRepository.SaveChangesAsync();
+        
+        return Ok(dto);
+    }  
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var venueEntity = await _showRepository.GetVenue(id);
+
+        if (venueEntity == null)
+        {
+            return NotFound();
+        }
+
+        await _showRepository.DeleteVenue(venueEntity);
+        await _showRepository.SaveChangesAsync();
+
+        return NoContent();
+    }    
 }
