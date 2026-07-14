@@ -5,6 +5,7 @@ public class LennyDbContext : DbContext
     public DbSet<PicEntity> Pics => Set<PicEntity>();    
     public DbSet<ShowEntity> Shows => Set<ShowEntity>();
     public DbSet<VenueEntity> Venues => Set<VenueEntity>();
+    public DbSet<BandEntity> Bands => Set<BandEntity>();
     
     public LennyDbContext(DbContextOptions<LennyDbContext> options)
         : base(options)
