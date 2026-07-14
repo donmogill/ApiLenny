@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 public record ShowDto
 (
     int Id,
-    string BandName,
+    int BandId,
     int VenueId,
     VenueDto? Venue,
     DateOnly Date,

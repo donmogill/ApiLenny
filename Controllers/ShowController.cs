@@ -3,7 +3,7 @@ using AutoMapper;
 using SQLitePCL;
 
 [ApiController]
-[Route("api/shows")]
+[Route("api/[controller]/[action]")]
 public class ShowController : ControllerBase
 {
     readonly private IShowRepository _showRepository;
@@ -18,8 +18,8 @@ public class ShowController : ControllerBase
 
     }
 
-    [HttpGet("{bandId:int}")]
-    public async Task<ActionResult<IEnumerable<ShowDto>>> GetShows(int bandId)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<ShowDto>>> GetShows()
     {
         var showEntities = await _showRepository.GetAll();
 

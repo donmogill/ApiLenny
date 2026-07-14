@@ -1,4 +1,5 @@
 public record BandDto (
     int Id,
-    string Name
+    string Name,
+    List<ShowDto>? Shows
 );
