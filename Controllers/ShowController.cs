@@ -18,8 +18,8 @@ public class ShowController : ControllerBase
 
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ShowDto>>> Get()
+    [HttpGet("{bandId:int}")]
+    public async Task<ActionResult<IEnumerable<ShowDto>>> GetShows(int bandId)
     {
         var showEntities = await _showRepository.GetAll();
 
@@ -28,7 +28,7 @@ public class ShowController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<ShowDto>> Get(int id)
+    public async Task<ActionResult<ShowDto>> GetOneShow(int id)
     {
         var showEntities = await _showRepository.Get(id);
         if (showEntities == null)
