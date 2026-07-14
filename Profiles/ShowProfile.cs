@@ -5,8 +5,12 @@ public class ShowProfile : Profile
         {
             CreateMap<ShowEntity, ShowDto>();
             CreateMap<ShowDto, ShowEntity>();
-            CreateMap<VenueEntity, VenueDto>();
+
             CreateMap<VenueDto, VenueEntity>();
+            CreateMap<VenueEntity, VenueDto>();
+
+            CreateMap<BandDto, BandEntity>();
+            CreateMap<BandEntity, BandDto>();
         }
     }
 

@@ -5,19 +5,19 @@ using System.IO;
 using System.Threading.Tasks;
 
 [ApiController]
-[Route("api/[controller]")]
-public class UploadController : ControllerBase
+[Route("api/pic")]
+public class PicController : ControllerBase
 {
     readonly private IPicRepository _picRepository;
-    public UploadController(IPicRepository picRepository)
+    public PicController(IPicRepository picRepository)
     {
         _picRepository = picRepository;
     }
     [HttpPost]
-    public async Task<IActionResult> UploadFile(IFormFile file)
+    public async Task<IActionResult> Add(IFormFile file)
     {
         if (file == null || file.Length == 0)
-            return BadRequest("No file uploaded.");
+            return BadRequest("No file Piced.");
 
         var service = new UploadService(file);    
 

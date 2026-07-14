@@ -12,4 +12,9 @@ public interface IShowRepository
     Task<VenueEntity> GetVenue(int id);
     Task AddVenue(VenueEntity venueEntity);
     Task DeleteVenue(VenueEntity venueEntity);
-}
+    
+    Task<IEnumerable<BandEntity>> GetBands();
+    Task<BandEntity> GetBand(int id);
+    Task AddBand(BandEntity bandEntity);
+    Task DeleteBand(BandEntity bandEntity);
+}    

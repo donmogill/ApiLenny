@@ -68,7 +68,7 @@ public class ShowController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<ActionResult> Update([FromBody]ShowDto showDto)
+    public async Task<ActionResult> UpdatePointOfInterest([FromBody]ShowDto showDto)
     {
         var showEntity = await _showRepository.Get(showDto.Id);
         if (showEntity == null)

@@ -67,5 +67,26 @@ public class ShowRepository : IShowRepository
         _context.Remove(venueEntity);
     }
 
+    public async Task<IEnumerable<BandEntity>> GetBands()
+    {
+        return await _context.Bands
+        .OrderBy(v => v.Name)
+        .ToListAsync();
+    }
+     public async Task<BandEntity> GetBand(int id)
+    {
+        return await _context.Bands
+        .Where(s=>s.Id == id)
+        .FirstAsync();
+    }
+   public async Task AddBand(BandEntity bandEntity)
+    {
+        _context.Bands.Add(bandEntity);              
+    }
+
+    public async Task DeleteBand(BandEntity bandEntity)
+    {
+        _context.Remove(bandEntity);
+    }
 
 }
