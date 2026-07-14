@@ -38,6 +38,12 @@ public static class SeedData
                 Time = TimeOnly.Parse("9:00 PM")
                 
             },            
+        });     
+        builder.Entity<BandEntity>().HasData(new List<BandEntity> {
+            new BandEntity {
+                Id = 1,                
+                Name = "Pyschedelic RoadShow"                
+            },            
         });       
     }
 }
