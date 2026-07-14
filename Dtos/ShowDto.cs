@@ -4,8 +4,9 @@ public record ShowDto
 (
     int Id,
     int BandId,
+    BandDto BandDto,
     int VenueId,
-    VenueDto? Venue,
+    VenueDto Venue,
     DateOnly Date,
     TimeOnly Time
 );
