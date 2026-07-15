@@ -60,27 +60,6 @@ app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository, ILogger
     return Results.Ok(result);
 });
 
-/*
-app.MapPost("/pics", async ([FromBody] PicDto dto, IPicRepository picRepository) =>
-{
-    if (!MiniValidator.TryValidate(dto, out var errors))
-    {
-        return Results.ValidationProblem(errors);
-    }
-
-    var result = picRepository.Add(dto);
-    return Results.Created($"/pic/{dto.Id}", result);
-}).ProducesValidationProblem().Produces<PicDto>(StatusCodes.Status201Created);
-*/
-
-app.MapPost("/upload", async ([FromBody]IFormFile file) =>
-{
-    
-    //var result = picRepository.UploadFile(file);
-    //return Results.Created($"/pics", result);
-}).DisableAntiforgery();
-
-
 app.MapPut("/pics/{id:int}", async (int id, [FromBody] PicDto dto, IPicRepository picRepository) =>
 {
     if (await picRepository.Get(id) == null)

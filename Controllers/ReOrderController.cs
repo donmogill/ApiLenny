@@ -17,7 +17,7 @@ public class ReorderController : ControllerBase
 
     public class ReorderRequest
     {
-        public List<int> ids { get; set; }
+        public required List<int> ids { get; set; }
     }
 
     [HttpPost]

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 [ApiController]
 [Route("api/venues")]
@@ -29,7 +30,13 @@ public class VenueController : ControllerBase
     public async Task<ActionResult<VenueDto>> Add([FromBody]VenueDto dto)
     {   
         if (dto == null)
-            return NotFound();
+        {
+q           return Results.Problem(
+                "Venue Dto is null", 
+                statusCode: StatusCodes.Status404NotFound);
+
+        }
+    
         await _showRepository.AddVenue(_mapper.Map<Venue>(dto));
         await _showRepository.SaveChangesAsync();
         

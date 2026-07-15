@@ -41,12 +41,12 @@ public class PicRepository : IPicRepository
 
     public async Task<PicDto> Get(int id)
     {
-        var e = await _context.Pics.SingleOrDefaultAsync(p => p.Id == id);
-        if (e == null)
+        var entity = await _context.Pics.SingleOrDefaultAsync(p => p.Id == id);
+        if (entity == null)
         {
-            return null;
+            throw new ArgumentException($"Trying to get pic: entity with ID {id} not found.");
         }
-        return new PicDto(e.Id, e.Filename, e.DisplayOrder);
+        return new PicDto(entity.Id, entity.Filename, entity.DisplayOrder);
     }
 
     public async Task<List<PicDto>> GetAll()
