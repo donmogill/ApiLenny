@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Api.Migrations
 {
     /// <inheritdoc />
-    public partial class bandsWithshows : Migration
+    public partial class Shows : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,7 @@ namespace Api.Migrations
                 });
 
             
+
             migrationBuilder.CreateTable(
                 name: "Shows",
                 columns: table => new
@@ -35,17 +36,17 @@ namespace Api.Migrations
                     VenueId = table.Column<int>(type: "INTEGER", nullable: false),
                     Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     Time = table.Column<TimeOnly>(type: "TEXT", nullable: false),
-                    Cover = table.Column<int>(type: "INTEGER", nullable: false),
-                    BandEntityId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Cover = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shows", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Shows_Bands_BandEntityId",
-                        column: x => x.BandEntityId,
+                        name: "FK_Shows_Bands_BandId",
+                        column: x => x.BandId,
                         principalTable: "Bands",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Shows_Venues_VenueId",
                         column: x => x.VenueId,
@@ -61,13 +62,13 @@ namespace Api.Migrations
 
             migrationBuilder.InsertData(
                 table: "Shows",
-                columns: new[] { "Id", "BandEntityId", "BandId", "Cover", "Date", "Time", "VenueId" },
-                values: new object[] { 1, null, 1, 0, new DateOnly(2026, 7, 24), new TimeOnly(21, 0, 0), 1 });
+                columns: new[] { "Id", "BandId", "Cover", "Date", "Time", "VenueId" },
+                values: new object[] { 1, 1, 0, new DateOnly(2026, 7, 25), new TimeOnly(21, 0, 0), 1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Shows_BandEntityId",
+                name: "IX_Shows_BandId",
                 table: "Shows",
-                column: "BandEntityId");
+                column: "BandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Shows_VenueId",
@@ -78,8 +79,6 @@ namespace Api.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Pics");
 
             migrationBuilder.DropTable(
                 name: "Shows");
@@ -87,8 +86,6 @@ namespace Api.Migrations
             migrationBuilder.DropTable(
                 name: "Bands");
 
-            migrationBuilder.DropTable(
-                name: "Venues");
         }
     }
 }

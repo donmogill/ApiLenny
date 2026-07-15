@@ -10,16 +10,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(LennyDbContext))]
-    [Migration("20260714220919_bandsWithshows")]
-    partial class bandsWithshows
+    [Migration("20260715180027_shows")]
+    partial class Shows
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.10");
 
-            modelBuilder.Entity("BandEntity", b =>
+            modelBuilder.Entity("Band", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,13 +59,10 @@ namespace Api.Migrations
                     b.ToTable("Pics");
                 });
 
-            modelBuilder.Entity("ShowEntity", b =>
+            modelBuilder.Entity("Show", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("BandEntityId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("BandId")
@@ -85,7 +82,7 @@ namespace Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BandEntityId");
+                    b.HasIndex("BandId");
 
                     b.HasIndex("VenueId");
 
@@ -97,13 +94,13 @@ namespace Api.Migrations
                             Id = 1,
                             BandId = 1,
                             Cover = 0,
-                            Date = new DateOnly(2026, 7, 24),
+                            Date = new DateOnly(2026, 7, 25),
                             Time = new TimeOnly(21, 0, 0),
                             VenueId = 1
                         });
                 });
 
-            modelBuilder.Entity("VenueEntity", b =>
+            modelBuilder.Entity("Venue", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,13 +123,15 @@ namespace Api.Migrations
                     b.ToTable("Venues");
                 });
 
-            modelBuilder.Entity("ShowEntity", b =>
+            modelBuilder.Entity("Show", b =>
                 {
-                    b.HasOne("BandEntity", null)
+                    b.HasOne("Band", null)
                         .WithMany("Shows")
-                        .HasForeignKey("BandEntityId");
+                        .HasForeignKey("BandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("VenueEntity", "Venue")
+                    b.HasOne("Venue", "Venue")
                         .WithMany()
                         .HasForeignKey("VenueId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -141,7 +140,7 @@ namespace Api.Migrations
                     b.Navigation("Venue");
                 });
 
-            modelBuilder.Entity("BandEntity", b =>
+            modelBuilder.Entity("Band", b =>
                 {
                     b.Navigation("Shows");
                 });

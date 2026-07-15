@@ -71,7 +71,8 @@ public class ShowRepository : IShowRepository
     {
         return await _context.Bands
         .Include(s=>s.Shows)
-        .OrderBy(v => v.Name)
+        .ThenInclude(v => v.Venue)
+        .OrderBy(b => b.Name)
         .ToListAsync();
     }
      public async Task<Band> GetBand(int id)
