@@ -17,7 +17,7 @@ public class PicController : ControllerBase
     public async Task<IActionResult> Add(IFormFile file)
     {
         if (file == null || file.Length == 0)
-            return BadRequest("No file Piced.");
+            return BadRequest("No file Picked.");
 
         var service = new UploadService(file);    
 

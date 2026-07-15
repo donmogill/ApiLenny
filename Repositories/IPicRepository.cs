@@ -7,6 +7,6 @@ public interface IPicRepository
     //Task<PicDto> Add(PicDto pic);
     Task<PicDto> Update(PicDto pic);
     Task<PicDto> Delete(int id);
-    Task<List<PicEntity>> GetAllSync();
+    Task<List<Pic>> GetAllSync();
     Task<PicDto> Add(PicDto pic);
 }

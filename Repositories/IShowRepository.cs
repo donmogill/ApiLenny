@@ -2,19 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 public interface IShowRepository
 {
     Task<bool> SaveChangesAsync();
-    Task<bool> ForEditSaveChangesAsync(ShowEntity showEntity);
-    Task<IEnumerable<ShowEntity>> GetAll();
-    Task AddShow(ShowEntity showEntity);
-    Task<ShowEntity> Get(int id);
-    Task Delete(ShowEntity showEntity);
+    Task<bool> ForEditSaveChangesAsync(Show show);
+    Task<IEnumerable<Show>> GetAll();
+    Task AddShow(Show show);
+    Task<Show> Get(int id);
+    Task Delete(Show show);
 
-    Task<IEnumerable<VenueEntity>> GetVenues();
-    Task<VenueEntity> GetVenue(int id);
-    Task AddVenue(VenueEntity venueEntity);
-    Task DeleteVenue(VenueEntity venueEntity);
+    Task<IEnumerable<Venue>> GetVenues();
+    Task<Venue> GetVenue(int id);
+    Task AddVenue(Venue venue);
+    Task DeleteVenue(Venue venue);
     
-    Task<IEnumerable<BandEntity>> GetBands();
-    Task<BandEntity> GetBand(int id);
-    Task AddBand(BandEntity bandEntity);
-    Task DeleteBand(BandEntity bandEntity);
+    Task<IEnumerable<Band>> GetBands();
+    Task<Band> GetBand(int id);
+    Task AddBand(Band band);
+    Task DeleteBand(Band band);
 }    

@@ -8,7 +8,7 @@ public class ShowRepository : IShowRepository
         _context = context;       
     }
 
-    public async Task<IEnumerable<ShowEntity>> GetAll()
+    public async Task<IEnumerable<Show>> GetAll()
     {
         return await _context.Shows
         .Include(v => v.Venue)
@@ -16,7 +16,7 @@ public class ShowRepository : IShowRepository
         .ToListAsync();
     }
 
-    public async Task<ShowEntity> Get(int id)
+    public async Task<Show> Get(int id)
     {
         return await _context.Shows
         .Where(s=>s.Id == id)
@@ -24,14 +24,14 @@ public class ShowRepository : IShowRepository
         .FirstAsync();
     }
 
-    public async Task Delete(ShowEntity showEntity)
+    public async Task Delete(Show show)
     {
-        _context.Remove(showEntity);
+        _context.Remove(show);
     }
 
-    public async Task AddShow(ShowEntity showEntity)
+    public async Task AddShow(Show show)
     {
-        _context.Add(showEntity);              
+        _context.Add(show);              
     }
 
     public async Task<bool> SaveChangesAsync()
@@ -39,54 +39,55 @@ public class ShowRepository : IShowRepository
         return (await _context.SaveChangesAsync() >= 0);
     }
 
-    public async Task<bool> ForEditSaveChangesAsync(ShowEntity showEntity)
+    public async Task<bool> ForEditSaveChangesAsync(Show show)
     {
-        _context.Entry(showEntity).State = EntityState.Modified;
+        _context.Entry(show).State = EntityState.Modified;
         return (await _context.SaveChangesAsync() >= 0);
     }
 
-    public async Task<IEnumerable<VenueEntity>> GetVenues()
+    public async Task<IEnumerable<Venue>> GetVenues()
     {
         return await _context.Venues
         .OrderBy(v => v.Name)
         .ToListAsync();
     }
-     public async Task<VenueEntity> GetVenue(int id)
+     public async Task<Venue> GetVenue(int id)
     {
         return await _context.Venues
         .Where(s=>s.Id == id)
         .FirstAsync();
     }
-   public async Task AddVenue(VenueEntity venueEntity)
+   public async Task AddVenue(Venue venue)
     {
-        _context.Venues.Add(venueEntity);              
+        _context.Venues.Add(venue);              
     }
 
-    public async Task DeleteVenue(VenueEntity venueEntity)
+    public async Task DeleteVenue(Venue venue)
     {
-        _context.Remove(venueEntity);
+        _context.Remove(venue);
     }
 
-    public async Task<IEnumerable<BandEntity>> GetBands()
+    public async Task<IEnumerable<Band>> GetBands()
     {
         return await _context.Bands
+        .Include(s=>s.Shows)
         .OrderBy(v => v.Name)
         .ToListAsync();
     }
-     public async Task<BandEntity> GetBand(int id)
+     public async Task<Band> GetBand(int id)
     {
         return await _context.Bands
         .Where(s=>s.Id == id)
         .FirstAsync();
     }
-   public async Task AddBand(BandEntity bandEntity)
+   public async Task AddBand(Band band)
     {
-        _context.Bands.Add(bandEntity);              
+        _context.Bands.Add(band);              
     }
 
-    public async Task DeleteBand(BandEntity bandEntity)
+    public async Task DeleteBand(Band band)
     {
-        _context.Remove(bandEntity);
+        _context.Remove(band);
     }
 
 }

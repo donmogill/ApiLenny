@@ -16,7 +16,7 @@ public class PicRepository : IPicRepository
     public async Task<PicDto> Add(PicDto pic)
     {
         // mapping plugin?
-        var entity = new PicEntity
+        var entity = new Pic
         {
             Filename = pic.Filename,
             DisplayOrder = new PicService(this).GetNextDisplayOrder()
@@ -57,7 +57,7 @@ public class PicRepository : IPicRepository
             .ToListAsync();
     }
 
-    public Task<List<PicEntity>> GetAllSync()
+    public Task<List<Pic>> GetAllSync()
     {
         return _context.Pics.ToListAsync();
     }

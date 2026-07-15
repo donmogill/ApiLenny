@@ -30,7 +30,7 @@ public class VenueController : ControllerBase
     {   
         if (dto == null)
             return NotFound();
-        await _showRepository.AddVenue(_mapper.Map<VenueEntity>(dto));
+        await _showRepository.AddVenue(_mapper.Map<Venue>(dto));
         await _showRepository.SaveChangesAsync();
         
         return Ok(dto);
@@ -39,14 +39,14 @@ public class VenueController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        var venueEntity = await _showRepository.GetVenue(id);
+        var venue = await _showRepository.GetVenue(id);
 
-        if (venueEntity == null)
+        if (venue == null)
         {
             return NotFound();
         }
 
-        await _showRepository.DeleteVenue(venueEntity);
+        await _showRepository.DeleteVenue(venue);
         await _showRepository.SaveChangesAsync();
 
         return NoContent();

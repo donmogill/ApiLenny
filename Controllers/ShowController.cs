@@ -45,7 +45,7 @@ public class ShowController : ControllerBase
     {   
         if (dto == null)
             return NotFound();
-        await _showRepository.AddShow(_mapper.Map<ShowEntity>(dto));
+        await _showRepository.AddShow(_mapper.Map<Show>(dto));
         await _showRepository.SaveChangesAsync();
         
         return Ok(dto);
@@ -54,14 +54,14 @@ public class ShowController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        var showEntity = await _showRepository.Get(id);
+        var show = await _showRepository.Get(id);
 
-        if (showEntity == null)
+        if (show == null)
         {
             return NotFound();
         }
 
-        await _showRepository.Delete(showEntity);
+        await _showRepository.Delete(show);
         await _showRepository.SaveChangesAsync();
 
         return NoContent();
@@ -70,14 +70,14 @@ public class ShowController : ControllerBase
     [HttpPut]
     public async Task<ActionResult> UpdatePointOfInterest([FromBody]ShowDto showDto)
     {
-        var showEntity = await _showRepository.Get(showDto.Id);
-        if (showEntity == null)
+        var show = await _showRepository.Get(showDto.Id);
+        if (show == null)
         {
             return NotFound("Show was not found in the database.");
         }
 
-        _mapper.Map(showDto, showEntity);
-        await _showRepository.ForEditSaveChangesAsync(showEntity);
+        _mapper.Map(showDto, show);
+        await _showRepository.ForEditSaveChangesAsync(show);
 
         return NoContent();
     } 

@@ -3,14 +3,14 @@ public class ShowProfile : Profile
     {
         public ShowProfile()
         {
-            CreateMap<ShowEntity, ShowDto>();
-            CreateMap<ShowDto, ShowEntity>();
+            CreateMap<Show, ShowDto>();
+            CreateMap<ShowDto, Show>();
 
-            CreateMap<VenueDto, VenueEntity>();
-            CreateMap<VenueEntity, VenueDto>();
+            CreateMap<VenueDto, Venue>();
+            CreateMap<Venue, VenueDto>();
 
-            CreateMap<BandDto, BandEntity>();
-            CreateMap<BandEntity, BandDto>();
+            CreateMap<BandDto, Band>();
+            CreateMap<Band, BandDto>();
         }
     }
 

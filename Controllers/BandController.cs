@@ -31,7 +31,7 @@ public class BandController : ControllerBase
         if (dto == null)
             return NotFound();
             
-        await _showRepository.AddBand(_mapper.Map<BandEntity>(dto));
+        await _showRepository.AddBand(_mapper.Map<Band>(dto));
         await _showRepository.SaveChangesAsync();
         
         return Ok(dto);
@@ -40,14 +40,14 @@ public class BandController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
-        var BandEntity = await _showRepository.GetBand(id);
+        var Band = await _showRepository.GetBand(id);
 
-        if (BandEntity == null)
+        if (Band == null)
         {
             return NotFound();
         }
 
-        await _showRepository.DeleteBand(BandEntity);
+        await _showRepository.DeleteBand(Band);
         await _showRepository.SaveChangesAsync();
 
         return NoContent();

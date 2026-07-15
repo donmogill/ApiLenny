@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 
 public class LennyDbContext : DbContext
 {
-    public DbSet<PicEntity> Pics => Set<PicEntity>();    
-    public DbSet<ShowEntity> Shows => Set<ShowEntity>();
-    public DbSet<VenueEntity> Venues => Set<VenueEntity>();
-    public DbSet<BandEntity> Bands => Set<BandEntity>();
+    public DbSet<Pic> Pics => Set<Pic>();    
+    public DbSet<Show> Shows => Set<Show>();
+    public DbSet<Venue> Venues => Set<Venue>();
+    public DbSet<Band> Bands => Set<Band>();
     
     public LennyDbContext(DbContextOptions<LennyDbContext> options)
         : base(options)
