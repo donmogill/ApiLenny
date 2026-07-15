@@ -9,15 +9,23 @@ using System.Threading.Tasks;
 public class PicController : ControllerBase
 {
     readonly private IPicRepository _picRepository;
-    public PicController(IPicRepository picRepository)
+    private readonly ILogger<PicController> _logger;
+        
+    public PicController(IPicRepository picRepository, ILogger<PicController> logger)
     {
         _picRepository = picRepository;
+        _logger = logger;
+        
     }
     [HttpPost]
     public async Task<IActionResult> Add(IFormFile file)
     {
         if (file == null || file.Length == 0)
+        {
+            _logger.LogWarning("No file Picked in PicController Add");
             return BadRequest("No file Picked.");
+        }
+            
 
         var service = new UploadService(file);    
 

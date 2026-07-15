@@ -49,11 +49,12 @@ app.UseStaticFiles();
 app.MapGet("/pics", (IPicRepository picRepository) =>
     picRepository.GetAll()).Produces<List<PicDto>>(StatusCodes.Status200OK);
 
-app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository) =>
+app.MapGet("/pic/{id:int}", async (int id, IPicRepository picRepository, ILogger<Program> logger) =>
 {
     var result = await picRepository.Get(id);
     if (result == null)
     {
+        logger.LogWarning("Pic was not found in the database.");
         return Results.NotFound();
     }
     return Results.Ok(result);
