@@ -27,14 +27,11 @@ public class VenueController : ControllerBase
     }    
 
     [HttpPost]
-    public async Task<ActionResult<VenueDto>> Add([FromBody]VenueDto dto)
+    public async   Task<ActionResult<VenueDto>> Add([FromBody]VenueDto dto)
     {   
         if (dto == null)
         {
-q           return Results.Problem(
-                "Venue Dto is null", 
-                statusCode: StatusCodes.Status404NotFound);
-
+           return  BadRequest("No VenueDto was provided.");
         }
     
         await _showRepository.AddVenue(_mapper.Map<Venue>(dto));
