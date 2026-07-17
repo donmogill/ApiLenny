@@ -31,12 +31,12 @@ public class ShowRepository : IShowRepository
 
     public async Task AddShow(Show show)
     {
-        _context.Add(show);              
+        await _context.AddAsync(show);              
     }
 
     public async Task<bool> SaveChangesAsync()
     {
-        return (await _context.SaveChangesAsync() >= 0);
+        return await _context.SaveChangesAsync() >= 0;
     }
 
     public async Task<bool> ForEditSaveChangesAsync(Show show)

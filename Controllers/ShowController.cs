@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using SQLitePCL;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -8,13 +8,20 @@ public class ShowController : ControllerBase
 {
     readonly private IShowRepository _showRepository;
     readonly private IMapper _mapper;
-    public ShowController(IShowRepository showRepository, IMapper mapper)
+    private readonly ILogger<PicController> _logger;
+    private readonly ShowService _showService;
+
+    public ShowController(IShowRepository showRepository, IMapper mapper, ILogger<PicController> logger)
     {
         _showRepository = showRepository ??
             throw new ArgumentNullException(nameof(showRepository));
 
         _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+        _logger = logger ??                 
+                throw new ArgumentNullException(nameof(mapper));
+
+        _showService = new ShowService(showRepository, _mapper, _logger);
 
     }
 
@@ -45,10 +52,29 @@ public class ShowController : ControllerBase
     {   
         if (dto == null)
             return NotFound();
-        await _showRepository.AddShow(_mapper.Map<Show>(dto));
-        await _showRepository.SaveChangesAsync();
+
+        var showEntity = _showService.AddShow(dto);
+
+        try
+        {
+            await _showRepository.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            var sqlException = ex.InnerException;
+            _logger.LogError($"Database add failed: {sqlException?.Message}");
+            return BadRequest(new { Message = "The provided data violates a database constraint." });
+
+        }        
+
+        var resultDto = _mapper.Map<ShowDto>(showEntity);
         
-        return Ok(dto);
+        return CreatedAtRoute("AddShow",
+                 new
+                 {
+                     ShowDto = dto
+                 },
+                 resultDto);
     }    
 
     [HttpDelete("{id}")]
