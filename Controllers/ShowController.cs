@@ -55,19 +55,23 @@ public class ShowController : ControllerBase
 
         var showEntity = _showService.AddShow(dto);
 
-        try
-        {
-            await _showRepository.SaveChangesAsync();
-        }
-        catch (DbUpdateException ex)
-        {
-            var sqlException = ex.InnerException;
-            _logger.LogError($"Database add failed: {sqlException?.Message}");
-            return BadRequest(new { Message = "The provided data violates a database constraint." });
+        await _showRepository.SaveChangesAsync();
 
-        }        
+        // try
+        // {
+        //     await _showRepository.SaveChangesAsync();
+        // }
+        // catch (DbUpdateException ex)
+        // {
+        //     var sqlException = ex.InnerException;
+        //     _logger.LogError($"Database add failed: {sqlException?.Message}");
+        //     return BadRequest(new { Message = "The provided data violates a database constraint." });
+
+        // }        
 
         var resultDto = _mapper.Map<ShowDto>(showEntity);
+
+        //return Ok(resultDto);
         
         return CreatedAtRoute("AddShow",
                  new
