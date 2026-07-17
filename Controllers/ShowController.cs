@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -34,7 +35,7 @@ public class ShowController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id}", Name = "GetOneShow")]
     public async Task<ActionResult<ShowDto>> GetOneShow(int id)
     {
         var showEntities = await _showRepository.Get(id);
@@ -73,7 +74,7 @@ public class ShowController : ControllerBase
 
         //return Ok(resultDto);
         
-        return CreatedAtRoute("AddShow",
+        return CreatedAtRoute("GetOneShow",
                  new
                  {
                      ShowDto = dto
