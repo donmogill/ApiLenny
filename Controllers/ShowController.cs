@@ -51,34 +51,24 @@ public class ShowController : ControllerBase
     public async Task<ActionResult<ShowDto>> Add([FromBody]ShowDto dto)
     {   
         if (dto == null)
+        {
+            _logger.LogWarning("Missing show to add.");
             return NotFound();
+        }            
 
-        var ReturnDto = _showService.AddShowComplete(dto);   
+        var resultDto = await _showService.AddShowComplete(dto);
 
         if (_showService.Success == false)
         {
             return BadRequest(new { Message = _showService.BadRequestMessage });
         }
-
-        /*
-
-        var showEntity = _showService.AddShow(dto);
-
-        if (_showService.AddShowSave() == false)
-        {
-            return BadRequest(new { Message = "The provided data violates a database constraint." });            
-        }
-
-        var returnDto = _showService.ReturnDto(showEntity);
-
-        */
         
         return CreatedAtRoute("GetOneShow",
                  new
                  {
-                     id = ReturnDto.Id
+                     id = resultDto.Id
                  },
-                 ReturnDto);
+                 resultDto);
     }    
 
     [HttpDelete("{id}")]

@@ -23,14 +23,14 @@ public class ShowService
         
     }
 
-    public ShowDto AddShowComplete(ShowDto dto)
+    public async Task<ShowDto> AddShowComplete(ShowDto dto)
     {
         var showEntity = _mapper.Map<Show>(dto);            
-        _showRepository.AddShow(showEntity);
+        await _showRepository.AddShow(showEntity);
 
         try
         {
-            _showRepository.SaveChangesAsync();
+            await _showRepository.SaveChangesAsync();
         }
         catch (DbUpdateException ex)
         {
@@ -38,6 +38,7 @@ public class ShowService
             _logger.LogError($"Database add failed: {sqlException?.Message}");
             Success = false;
             BadRequestMessage = "The provided data violates a database constraint.";
+            return new ShowDto(0, 0, 0, null, DateOnly.MinValue, TimeOnly.MinValue, 0);
         }       
         Success = true;
 
@@ -52,11 +53,11 @@ public class ShowService
         return showEntity;        
     }
 
-    public bool AddShowSave()
+    public async Task<bool> AddShowSave()
     {
         try
         {
-            _showRepository.SaveChangesAsync();
+            await _showRepository.SaveChangesAsync();
         }
         catch (DbUpdateException ex)
         {
