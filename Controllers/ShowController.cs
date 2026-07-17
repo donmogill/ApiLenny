@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -56,19 +55,17 @@ public class ShowController : ControllerBase
 
         var showEntity = _showService.AddShow(dto);
 
-        await _showRepository.SaveChangesAsync();
+        try
+        {
+            await _showRepository.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            var sqlException = ex.InnerException;
+            _logger.LogError($"Database add failed: {sqlException?.Message}");
+            return BadRequest(new { Message = "The provided data violates a database constraint." });
 
-        // try
-        // {
-        //     await _showRepository.SaveChangesAsync();
-        // }
-        // catch (DbUpdateException ex)
-        // {
-        //     var sqlException = ex.InnerException;
-        //     _logger.LogError($"Database add failed: {sqlException?.Message}");
-        //     return BadRequest(new { Message = "The provided data violates a database constraint." });
-
-        // }        
+        }        
 
         var resultDto = _mapper.Map<ShowDto>(showEntity);
 
@@ -77,7 +74,7 @@ public class ShowController : ControllerBase
         return CreatedAtRoute("GetOneShow",
                  new
                  {
-                     ShowDto = dto
+                     id = dto.Id
                  },
                  resultDto);
     }    
