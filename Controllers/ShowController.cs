@@ -53,30 +53,32 @@ public class ShowController : ControllerBase
         if (dto == null)
             return NotFound();
 
+        var ReturnDto = _showService.AddShowComplete(dto);   
+
+        if (_showService.Success == false)
+        {
+            return BadRequest(new { Message = _showService.BadRequestMessage });
+        }
+
+        /*
+
         var showEntity = _showService.AddShow(dto);
 
-        try
+        if (_showService.AddShowSave() == false)
         {
-            await _showRepository.SaveChangesAsync();
+            return BadRequest(new { Message = "The provided data violates a database constraint." });            
         }
-        catch (DbUpdateException ex)
-        {
-            var sqlException = ex.InnerException;
-            _logger.LogError($"Database add failed: {sqlException?.Message}");
-            return BadRequest(new { Message = "The provided data violates a database constraint." });
 
-        }        
+        var returnDto = _showService.ReturnDto(showEntity);
 
-        var resultDto = _mapper.Map<ShowDto>(showEntity);
-
-        //return Ok(resultDto);
+        */
         
         return CreatedAtRoute("GetOneShow",
                  new
                  {
-                     id = dto.Id
+                     id = ReturnDto.Id
                  },
-                 resultDto);
+                 ReturnDto);
     }    
 
     [HttpDelete("{id}")]
