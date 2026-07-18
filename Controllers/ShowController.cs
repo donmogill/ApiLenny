@@ -34,20 +34,19 @@ public class ShowController : ControllerBase
     [HttpGet("{id}", Name = "GetOneShow")]
     public async Task<ActionResult<ShowDto>> GetOneShow(int id)
     {
-        var showEntities = await _showRepository.Get(id);
-        if (showEntities == null)
-        {
-            return NotFound();
-        }
+        var result = _showService.GetOneShow(id);
 
-        var result = _mapper.Map<ShowDto>(showEntities);
+        if (_showService.Success == false)
+        {
+            return BadRequest(new { Message = _showService.BadRequestMessage });
+        }
         return Ok(result);
     }
 
     [HttpPost]
     public async Task<ActionResult<ShowDto>> Add([FromBody]ShowDto dto)
     {   
-        var resultDto = await _showService.AddShowComplete(dto);
+        var resultDto = await _showService.AddShow(dto);
 
         if (_showService.Success == false)
         {

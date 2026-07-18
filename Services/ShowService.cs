@@ -9,7 +9,7 @@ public class ShowService
     private readonly ILogger<PicController> _logger;
     private IShowRepository _showRepository { get; }  
     
-
+    private  ShowDto emptyShowDto {get; set; }
     public bool Success { get; set;}
     public string BadRequestMessage { get; set; }
 
@@ -20,10 +20,10 @@ public class ShowService
         _logger = logger;
         Success = true;
         BadRequestMessage = "";
-        
+        emptyShowDto = new ShowDto(0, 0, 0, null, DateOnly.MinValue, TimeOnly.MinValue, 0);
     }
 
-    public async Task<ShowDto> AddShowComplete(ShowDto dto)
+    public async Task<ShowDto> AddShow(ShowDto dto)
     {
         var showEntity = _mapper.Map<Show>(dto);            
         await _showRepository.AddShow(showEntity);
@@ -38,7 +38,7 @@ public class ShowService
             _logger.LogError($"Database add failed: {sqlException?.Message}");
             Success = false;
             BadRequestMessage = "The provided data violates a database constraint.";
-            return new ShowDto(0, 0, 0, null, DateOnly.MinValue, TimeOnly.MinValue, 0);
+            return emptyShowDto;
         }       
         Success = true;
 
@@ -50,6 +50,20 @@ public class ShowService
 
         return _mapper.Map<IEnumerable<ShowDto>>(showEntities);
     }
+
+    public async Task<ShowDto> GetOneShow(int id)
+    {
+        var showEntities = await _showRepository.Get(id);
+        if (showEntities == null)
+        {
+            _logger.LogWarning($"No Show with id:{id}");
+            Success = false;
+            BadRequestMessage = "Warning: No show found";
+            return emptyShowDto;
+        }
+
+        return _mapper.Map<ShowDto>(showEntities);
+    }    
 
 
     
