@@ -1,6 +1,4 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 public class ShowService
@@ -56,7 +54,7 @@ public class ShowService
         var showEntities = await _showRepository.Get(id);
         if (showEntities == null)
         {
-            _logger.LogWarning($"No Show with id:{id}");
+            _logger.LogWarning($"GetOneShow: No Show with id:{id}");
             Success = false;
             BadRequestMessage = "Warning: No show found";
             return emptyShowDto;
@@ -64,6 +62,51 @@ public class ShowService
 
         return _mapper.Map<ShowDto>(showEntities);
     }    
+
+    public async Task Delete(int id)
+    {
+        var show = await _showRepository.Get(id);
+
+        if (show == null)
+        {
+            _logger.LogWarning($"Delete: No Show with id:{id}");
+            Success = false;
+            BadRequestMessage = "Warning: No show found for delete.";
+            return;
+        }
+
+        await _showRepository.Delete(show);
+        await _showRepository.SaveChangesAsync();        
+    }    
+
+    public async Task Update(ShowDto showDto)
+    {
+        var show = await _showRepository.Get(showDto.Id);
+        if (show == null)
+        {
+            _logger.LogWarning($"Update: No Show with id:{showDto.Id}");
+            Success = false;
+            BadRequestMessage = "Warning: No show found for update.";
+            return;
+        }
+
+        _mapper.Map(showDto, show);        
+
+        try
+        {
+            await _showRepository.ForEditSaveChangesAsync(show);   
+        }
+        catch (DbUpdateException ex)
+        {
+            var sqlException = ex.InnerException;
+            _logger.LogError($"Database update failed: {sqlException?.Message}");
+            Success = false;
+            BadRequestMessage = "The provided data violates a database constraint.";
+            return;
+        }
+
+        return;
+    } 
 
 
     

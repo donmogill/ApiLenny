@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+
 
 [ApiController]
 [Route("api/[controller]/[action]")]
@@ -64,15 +64,14 @@ public class ShowController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
+        await _showService.Delete(id);
+
         var show = await _showRepository.Get(id);
 
-        if (show == null)
+        if (_showService.Success == false)
         {
-            return NotFound();
+            return BadRequest(new { Message = _showService.BadRequestMessage });
         }
-
-        await _showRepository.Delete(show);
-        await _showRepository.SaveChangesAsync();
 
         return NoContent();
     }
@@ -80,15 +79,12 @@ public class ShowController : ControllerBase
     [HttpPut]
     public async Task<ActionResult> Update([FromBody]ShowDto showDto)
     {
-        var show = await _showRepository.Get(showDto.Id);
-        if (show == null)
+        await _showService.Update(showDto);
+
+        if (_showService.Success == false)
         {
-            return NotFound("Show was not found in the database.");
+            return BadRequest(new { Message = _showService.BadRequestMessage });
         }
-
-        _mapper.Map(showDto, show);
-        await _showRepository.ForEditSaveChangesAsync(show);
-
         return NoContent();
     } 
            
