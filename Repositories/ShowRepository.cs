@@ -16,12 +16,12 @@ public class ShowRepository : IShowRepository
         .ToListAsync();
     }
 
-    public async Task<Show> Get(int id)
+    public async Task<Show?> Get(int id)
     {
         return await _context.Shows
         .Where(s=>s.Id == id)
         .Include(v => v.Venue)
-        .FirstAsync();
+        .FirstOrDefaultAsync();
     }
 
     public async Task Delete(Show show)

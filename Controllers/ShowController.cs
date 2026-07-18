@@ -34,7 +34,7 @@ public class ShowController : ControllerBase
     [HttpGet("{id}", Name = "GetOneShow")]
     public async Task<ActionResult<ShowDto>> GetOneShow(int id)
     {
-        var result = _showService.GetOneShow(id);
+        var result = await _showService.GetOneShow(id);
 
         if (_showService.Success == false)
         {
