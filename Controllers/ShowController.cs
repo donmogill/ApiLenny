@@ -28,10 +28,7 @@ public class ShowController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowDto>>> GetShows()
     {
-        var showEntities = await _showRepository.GetAll();
-
-        var result = _mapper.Map<IEnumerable<ShowDto>>(showEntities);
-        return Ok(result);
+        return Ok(_showService.GetShows());
     }
 
     [HttpGet("{id}", Name = "GetOneShow")]
@@ -50,12 +47,6 @@ public class ShowController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ShowDto>> Add([FromBody]ShowDto dto)
     {   
-        if (dto == null)
-        {
-            _logger.LogWarning("Missing show to add.");
-            return NotFound();
-        }            
-
         var resultDto = await _showService.AddShowComplete(dto);
 
         if (_showService.Success == false)

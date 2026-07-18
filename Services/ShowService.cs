@@ -44,35 +44,13 @@ public class ShowService
 
         return _mapper.Map<ShowDto>(showEntity);        
     }
-
-    public Show AddShow(ShowDto dto)
+    public async Task<IEnumerable<ShowDto>> GetShows()
     {
-        var showEntity = _mapper.Map<Show>(dto);            
-        _showRepository.AddShow(showEntity);
+        var showEntities = await _showRepository.GetAll();
 
-        return showEntity;        
+        return _mapper.Map<IEnumerable<ShowDto>>(showEntities);
     }
 
-    public async Task<bool> AddShowSave()
-    {
-        try
-        {
-            await _showRepository.SaveChangesAsync();
-        }
-        catch (DbUpdateException ex)
-        {
-            var sqlException = ex.InnerException;
-            _logger.LogError($"Database add failed: {sqlException?.Message}");
-            return false;
-        }       
-
-        return true;        
-    }
-
-    public ShowDto ReturnDto(Show showEntity)
-    {
-        return _mapper.Map<ShowDto>(showEntity);
-    }
 
     
 }
