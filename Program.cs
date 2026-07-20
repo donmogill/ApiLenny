@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using ConfArch.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddControllers(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
+
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o => 
@@ -38,6 +41,7 @@ builder.Services.AddAuthorization(o =>
 
 builder.Services.AddScoped<IPicRepository, PicRepository>();
 builder.Services.AddScoped<IShowRepository, ShowRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(typeof(Program).Assembly));
 
@@ -131,6 +135,9 @@ app.MapDelete("/shows/{id:int}", async (int id, IShowRepository showRepository) 
 }).ProducesProblem(404).Produces(StatusCodes.Status200OK); 
 
 app.UseRouting();
-app.UseAuthorization();
+//app.UseAuthorization();
+app.MapDefaultControllerRoute();
+app.MapFallbackToFile("index.html");
+
 
 app.Run();
