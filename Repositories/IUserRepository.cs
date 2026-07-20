@@ -1,6 +1,9 @@
 using WebApplication17.Dtos;
 
-public interface IUserRepository
+namespace ConfArch.Data.Repositories
 {
-    UserEntity? GetByUsernameAndPassword(string username, string password);
+    public interface IUserRepository
+    {
+        UserEntity? GetByUsernameAndPassword(string username, string password);
+    }
 }

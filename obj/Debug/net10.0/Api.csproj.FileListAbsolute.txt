@@ -167,3 +167,5 @@ C:\Users\thedo\source\repos\React and web Api\lenny\api\bin\Debug\net10.0\runtim
 C:\Users\thedo\source\repos\React and web Api\lenny\api\bin\Debug\net10.0\runtimes\iossimulator-arm64\native\e_sqlite3.a
 C:\Users\thedo\source\repos\React and web Api\lenny\api\bin\Debug\net10.0\runtimes\iossimulator-x64\native\e_sqlite3.a
 C:\Users\thedo\source\repos\React and web Api\lenny\api\bin\Debug\net10.0\runtimes\iossimulator-x86\native\e_sqlite3.a
+C:\Users\thedo\source\repos\React and web Api\Lenny\Api\obj\Debug\net10.0\Api.RazorAssemblyInfo.cache
+C:\Users\thedo\source\repos\React and web Api\Lenny\Api\obj\Debug\net10.0\Api.RazorAssemblyInfo.cs

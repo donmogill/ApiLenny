@@ -130,6 +130,7 @@ app.MapDelete("/shows/{id:int}", async (int id, IShowRepository showRepository) 
     return Results.Ok(result);    
 }).ProducesProblem(404).Produces(StatusCodes.Status200OK); 
 
+app.UseRouting();
 app.UseAuthorization();
 
 app.Run();
