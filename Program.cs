@@ -36,6 +36,7 @@ builder.Services.AddAuthorization(o =>
     o.AddPolicy("admin", p => p.RequireClaim("role", "Admin"))
 );
 
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IPicRepository, PicRepository>();
 builder.Services.AddScoped<IShowRepository, ShowRepository>();
