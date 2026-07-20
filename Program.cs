@@ -135,5 +135,6 @@ app.MapDelete("/shows/{id:int}", async (int id, IShowRepository showRepository) 
 
 app.UseRouting();
 app.UseAuthorization();
+app.MapDefaultControllerRoute();
 
 app.Run();
