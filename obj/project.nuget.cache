@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/BgIO+8ij7M=",
+  "dgSpecHash": "XNJT0oUHwSM=",
   "success": true,
-  "projectFilePath": "c:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thedo\\.nuget\\packages\\automapper\\16.2.0\\automapper.16.2.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

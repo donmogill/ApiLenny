@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,22 @@ builder.Services.AddControllers(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(o => 
+    {
+        o.Cookie.Name = "__Host-spa";
+        o.Cookie.SameSite = SameSiteMode.Strict;
+        o.Events.OnRedirectToLogin = (context) =>
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        };
+    });
+builder.Services.AddAuthorization(o => 
+    o.AddPolicy("admin", p => p.RequireClaim("role", "Admin"))
+);
+
 
 builder.Services.AddScoped<IPicRepository, PicRepository>();
 builder.Services.AddScoped<IShowRepository, ShowRepository>();
@@ -48,6 +65,9 @@ app.UseCors(p=> p.WithOrigins("http://localhost:3000")
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
+
+app.UseAuthentication();
+
 
 
 app.MapGet("/pics", (IPicRepository picRepository) =>
@@ -109,5 +129,7 @@ app.MapDelete("/shows/{id:int}", async (int id, IShowRepository showRepository) 
     }
     return Results.Ok(result);    
 }).ProducesProblem(404).Produces(StatusCodes.Status200OK); 
+
+app.UseAuthorization();
 
 app.Run();
