@@ -61,7 +61,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors(p=> p.WithOrigins("http://localhost:3000")
+app.UseCors(p=> p.WithOrigins("https://localhost:3000")
     .AllowAnyHeader()
     .AllowAnyMethod());
 
