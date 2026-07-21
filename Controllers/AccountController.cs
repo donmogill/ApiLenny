@@ -24,8 +24,7 @@ namespace ConfArch.Web.Controllers
             return View(new LoginModel());
         }
 
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost]                
         public async Task<IActionResult> Login(LoginModel model)
         {
             var user = userRepository.GetByUsernameAndPassword(model.Username, model.Password);

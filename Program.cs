@@ -137,4 +137,10 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapDefaultControllerRoute();
 
+app.MapControllerRoute(
+    name: "Login", // Must match your asp-route value
+    pattern: "auth/login",
+    defaults: new { controller = "Account", action = "Login" }
+);
+
 app.Run();
