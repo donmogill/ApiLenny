@@ -46,7 +46,7 @@ namespace ConfArch.Web.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, 
                 new AuthenticationProperties { IsPersistent = model.RememberLogin });
 
-            return Redirect("https://localhost:3000");
+            return Redirect(@"http://localhost:3000");
         }
 
         [Authorize]
