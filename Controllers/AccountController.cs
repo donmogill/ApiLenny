@@ -25,7 +25,7 @@ namespace ConfArch.Web.Controllers
         }
 
         [HttpPost]
-        
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginModel model)
         {
             var user = userRepository.GetByUsernameAndPassword(model.Username, model.Password);
