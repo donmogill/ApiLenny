@@ -25,6 +25,7 @@ namespace ConfArch.Web.Controllers
         }
 
         [HttpPost]                
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
             var user = userRepository.GetByUsernameAndPassword(model.Username, model.Password);
@@ -45,7 +46,7 @@ namespace ConfArch.Web.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, 
                 new AuthenticationProperties { IsPersistent = model.RememberLogin });
 
-            return Redirect("/");
+            return Redirect("https://localhost:3000");
         }
 
         [Authorize]
