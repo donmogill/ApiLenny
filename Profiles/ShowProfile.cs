@@ -11,6 +11,9 @@ public class ShowProfile : Profile
 
             CreateMap<BandDto, Band>();
             CreateMap<Band, BandDto>();
+
+            CreateMap<Video, VideoDto>();
+            CreateMap<VideoDto, Video>();
         }
     }
 

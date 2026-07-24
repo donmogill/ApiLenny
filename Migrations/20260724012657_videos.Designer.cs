@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(LennyDbContext))]
-    partial class LennyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260724012657_videos")]
+    partial class videos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.10");
@@ -117,9 +120,6 @@ namespace Api.Migrations
                     b.Property<DateOnly>("DateUploaded")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -140,8 +140,7 @@ namespace Api.Migrations
                             Id = 1,
                             BandId = 2,
                             Caption = "Don plays some jazzy acoustic!",
-                            DateUploaded = new DateOnly(2016, 7, 24),
-                            DisplayOrder = 0,
+                            DateUploaded = new DateOnly(2016, 7, 23),
                             Name = "Don plays Black Beauty",
                             YoutubeId = "o-Vw1tbGLtw"
                         },
@@ -150,8 +149,7 @@ namespace Api.Migrations
                             Id = 2,
                             BandId = 1,
                             Caption = "Look at our cool band!",
-                            DateUploaded = new DateOnly(2016, 7, 24),
-                            DisplayOrder = 0,
+                            DateUploaded = new DateOnly(2016, 7, 23),
                             Name = "Psychedelic RoadShow sizzle",
                             YoutubeId = "VWN9nuJODs0"
                         });

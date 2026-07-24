@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Api.Migrations
 {
     [DbContext(typeof(LennyDbContext))]
-    [Migration("20260715180027_shows")]
-    partial class Shows
+    [Migration("20260724171454_video_displayOrder")]
+    partial class video_displayOrder
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,13 +32,6 @@ namespace Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Bands");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Pyschedelic RoadShow"
-                        });
                 });
 
             modelBuilder.Entity("Pic", b =>
@@ -87,17 +80,6 @@ namespace Api.Migrations
                     b.HasIndex("VenueId");
 
                     b.ToTable("Shows");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BandId = 1,
-                            Cover = 0,
-                            Date = new DateOnly(2026, 7, 25),
-                            Time = new TimeOnly(21, 0, 0),
-                            VenueId = 1
-                        });
                 });
 
             modelBuilder.Entity("Venue", b =>
@@ -123,6 +105,61 @@ namespace Api.Migrations
                     b.ToTable("Venues");
                 });
 
+            modelBuilder.Entity("Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BandId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateOnly>("DateUploaded")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("YoutubeId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BandId");
+
+                    b.ToTable("Videos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BandId = 2,
+                            Caption = "Don plays some jazzy acoustic!",
+                            DateUploaded = new DateOnly(2016, 7, 24),
+                            DisplayOrder = 0,
+                            Name = "Don plays Black Beauty",
+                            YoutubeId = "o-Vw1tbGLtw"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BandId = 1,
+                            Caption = "Look at our cool band!",
+                            DateUploaded = new DateOnly(2016, 7, 24),
+                            DisplayOrder = 0,
+                            Name = "Psychedelic RoadShow sizzle",
+                            YoutubeId = "VWN9nuJODs0"
+                        });
+                });
+
             modelBuilder.Entity("Show", b =>
                 {
                     b.HasOne("Band", null)
@@ -138,6 +175,17 @@ namespace Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Venue");
+                });
+
+            modelBuilder.Entity("Video", b =>
+                {
+                    b.HasOne("Band", "Band")
+                        .WithMany()
+                        .HasForeignKey("BandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Band");
                 });
 
             modelBuilder.Entity("Band", b =>
