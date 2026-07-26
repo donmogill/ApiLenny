@@ -28,7 +28,7 @@ public class ShowController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ShowDto>>> GetShows()
     {
-        return Ok(_showService.GetShows());
+        return Ok(await _showService.GetShows());
     }
 
     [HttpGet("{id}", Name = "GetOneShow")]

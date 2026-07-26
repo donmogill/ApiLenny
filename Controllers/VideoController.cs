@@ -9,8 +9,9 @@ public class VideoController : ControllerBase
     readonly private IVideoRepository _videoRepository;
     readonly private IMapper _mapper;
     private readonly VideoService _videoService;
+    private readonly ILogger<VideoController> _logger;
 
-    public VideoController(IVideoRepository videoRepository, IMapper mapper)
+    public VideoController(IVideoRepository videoRepository, IMapper mapper, ILogger<VideoController> logger)
     {
         _videoRepository = videoRepository ??
             throw new ArgumentNullException(nameof(videoRepository));
@@ -18,7 +19,10 @@ public class VideoController : ControllerBase
         _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
 
-        _videoService = new VideoService(videoRepository, _mapper);        
+        _logger = logger ??                 
+                throw new ArgumentNullException(nameof(mapper));
+
+        _videoService = new VideoService(videoRepository, _mapper, _logger);        
     }
 
     [HttpGet]
@@ -27,31 +31,11 @@ public class VideoController : ControllerBase
         return Ok(await _videoService.GetVideos());
     }    
 
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<VideoDto>>> GetVideos()
-    // {
-    //     var videoEntities = await _videoRepository.GetAll();
-
-    //     var result = _mapper.Map<IEnumerable<VideoDto>>(videoEntities);
-    //     return Ok(result);
-    // }  
 
     [HttpPost]
     public async Task<IActionResult> ReOrder(int[] ids)
     {
-        int newOrder = 1;
-        foreach (int id in ids)
-        {
-            // get video from database
-            var video = await _videoRepository.Get(id);
-            video.DisplayOrder = newOrder;
-            
-            await _videoRepository.Update(video);
-            newOrder++;
-        }
-        
-        return Ok(ids);
-
+        return Ok(await _videoService.ReOrder(ids));
     }    
 
     [HttpDelete("{id}")]
