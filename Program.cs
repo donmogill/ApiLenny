@@ -22,16 +22,19 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(o => 
+    .AddCookie(options =>
     {
-        o.Cookie.Name = "__Host-spa";
-        o.Cookie.SameSite = SameSiteMode.Strict;
-        o.Events.OnRedirectToLogin = (context) =>
+        // Define your login path
+        options.LoginPath = "/Account/Login"; 
+
+        // Clear the default .NET 10 behavior that forces a 401 on APIs
+        options.Events.OnRedirectToLogin = context =>
         {
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.Redirect(context.RedirectUri);
             return Task.CompletedTask;
         };
     });
+    
 builder.Services.AddAuthorization(o => 
     o.AddPolicy("admin", p => p.RequireClaim("role", "Admin"))
 );
@@ -143,5 +146,6 @@ app.MapControllerRoute(
     pattern: "auth/login",
     defaults: new { controller = "Account", action = "Login" }
 );
+app.MapFallbackToFile("index.html");
 
 app.Run();

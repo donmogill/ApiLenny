@@ -46,10 +46,9 @@ namespace ConfArch.Web.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, 
                 new AuthenticationProperties { IsPersistent = model.RememberLogin });
 
-            return Redirect(@"http://localhost:3000");
+            return Redirect("/");
         }
 
-        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -58,6 +57,8 @@ namespace ConfArch.Web.Controllers
 
         public IActionResult GetUser()
         {
+            var user = new JsonResult(User.Claims.Select(c => new { Type=c.Type, Value=c.Value }));
+
             return new JsonResult(User.Claims.Select(c => new { Type=c.Type, Value=c.Value }));
         }
     }

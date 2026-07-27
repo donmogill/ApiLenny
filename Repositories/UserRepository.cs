@@ -7,6 +7,7 @@ namespace ConfArch.Data.Repositories
     {
         private List<UserEntity> users = new()
         {
+            // AlfieAndHunter!
             new UserEntity(3522, "don", "oeHsJMHi9cmGeeV3Y+ED/w1uepLiuGULSAtsoH/eneI=", "blue", "Admin")
         };
 
