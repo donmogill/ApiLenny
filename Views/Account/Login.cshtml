@@ -13,27 +13,27 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="" method="post">
-                        @Html.AntiForgeryToken()
+                    <form asp-route="Login">
                         <fieldset>
                             <div class="form-group">
-                                <label for="Username">Username</label>
-                                <input class="form-control" placeholder="Username" autofocus="" type="text" data-val="true" data-val-required="The Username field is required." id="Username" name="Username" value="">
+                                <label asp-for="Username"></label>
+                                <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="Password">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" autocomplete="off" data-val="true" data-val-required="The Password field is required." id="Password" name="Password">
+                                <label asp-for="Password"></label>
+                                <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
                             </div>
                             <div class="form-group login-remember">
-                                <label for="RememberLogin">
-                                    <input type="checkbox" data-val="true" data-val-required="The RememberLogin field is required." id="RememberLogin" name="RememberLogin" value="true">
+                                <label asp-for="RememberLogin">
+                                    <input type="checkbox" asp-for="RememberLogin">
                                     <strong>Remember Me</strong>
                                 </label>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary" type="submit">Login</button>
                             </div>
-                        </fieldset>                    
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
