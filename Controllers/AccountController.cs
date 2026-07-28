@@ -30,7 +30,11 @@ namespace ConfArch.Web.Controllers
         {
             var user = userRepository.GetByUsernameAndPassword(model.Username, model.Password);
             if (user == null)
-                return Unauthorized();
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View(); // Returns user to the login form with the error
+            }
+                //return Unauthorized();
 
             var claims = new List<Claim>
             {

@@ -35,6 +35,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         };
     });
     
+
+builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "pathToLoginPage");
+
 builder.Services.AddAuthorization(o => 
     o.AddPolicy("admin", p => p.RequireClaim("role", "Admin"))
 );
