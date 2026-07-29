@@ -1,7 +1,7 @@
 public record VideoDto (
     int Id,
     string Name,
-    string YoutubeId,
+    string VideoUrl,
     DateOnly DateUploaded,
     int BandId,
     Band? Band,
