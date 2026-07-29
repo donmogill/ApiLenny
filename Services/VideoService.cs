@@ -63,8 +63,15 @@ public class VideoService
 
     }        
 
-    public async Task<VideoDto> AddVideo(VideoDto dto)
+    public async Task<VideoDto> AddVideo(VideoDto dto)    
     {
+        if (dto == null)
+        {
+            Success = false;
+            BadRequestMessage = "No Video was provided.";
+            return emptyVideoDto;
+        }
+
         var videoEntity = _mapper.Map<Video>(dto);            
 
         // fixup dropbox link

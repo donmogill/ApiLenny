@@ -57,15 +57,14 @@ public class VideoController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<VideoDto>> Add([FromBody]VideoDto dto)
     {   
-        if (dto == null)
-        {
-           return  BadRequest("No VideoDto was provided.");
-        }
+        var resultDto = await _videoService.AddVideo(dto);
 
-        await _videoRepository.Add(_mapper.Map<Video>(dto));
-        await _videoRepository.SaveChangesAsync();
+        if (_videoService.Success == false)
+        {
+            return BadRequest(new { Message = _videoService.BadRequestMessage });
+        }
         
-        return Ok(dto);
+        return Ok(resultDto);
     }  
 
 }
