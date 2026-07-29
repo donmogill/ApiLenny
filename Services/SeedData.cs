@@ -26,7 +26,7 @@ public static class SeedData
                 Name = "Girls Got Rhythm At Mrs Olsons",  
                 VideoUrl = "https://www.dropbox.com/scl/fi/on30us31lel4t0gdiki4z/Video-Jul-20-2026-11-43-39-PM.mp4?rlkey=mznodpq2plhkdcuoqdkxwr0rq&st=xs9zskw3&raw=1",
                 BandId = 2,            
-                DateUploaded = DateOnly.FromDateTime(DateTime.Now),
+                DateUploaded = DateOnly.Parse("07/19/2026"),
                 Caption = "Girls Got Rhythm At Mrs Olsons!",
             },            
             new Video {
@@ -34,7 +34,7 @@ public static class SeedData
                 Name = "One Way to rock",  
                 VideoUrl = "https://www.dropbox.com/scl/fi/zq9ieuxymrsj5hah8n6x7/Video-Jul-19-2026-2-23-11-PM.mp4?rlkey=k2ecapfc1txigldxvis9qs1yz&st=of67g5ba&raw=1",
                 BandId = 1,            
-                DateUploaded = DateOnly.FromDateTime(DateTime.Now),
+                DateUploaded = DateOnly.Parse("07/19/2026"),
                 Caption = "There's Only One Way to Rock!",
             },            
         });
