@@ -124,7 +124,7 @@ namespace Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("YoutubeId")
+                    b.Property<string>("VideoUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -139,21 +139,21 @@ namespace Api.Migrations
                         {
                             Id = 1,
                             BandId = 2,
-                            Caption = "Don plays some jazzy acoustic!",
-                            DateUploaded = new DateOnly(2016, 7, 24),
+                            Caption = "Girls Got Rhythm At Mrs Olsons!",
+                            DateUploaded = new DateOnly(2026, 7, 19),
                             DisplayOrder = 0,
-                            Name = "Don plays Black Beauty",
-                            YoutubeId = "o-Vw1tbGLtw"
+                            Name = "Girls Got Rhythm At Mrs Olsons",
+                            VideoUrl = "https://www.dropbox.com/scl/fi/on30us31lel4t0gdiki4z/Video-Jul-20-2026-11-43-39-PM.mp4?rlkey=mznodpq2plhkdcuoqdkxwr0rq&st=xs9zskw3&raw=1"
                         },
                         new
                         {
                             Id = 2,
                             BandId = 1,
-                            Caption = "Look at our cool band!",
-                            DateUploaded = new DateOnly(2016, 7, 24),
+                            Caption = "There's Only One Way to Rock!",
+                            DateUploaded = new DateOnly(2026, 7, 19),
                             DisplayOrder = 0,
-                            Name = "Psychedelic RoadShow sizzle",
-                            YoutubeId = "VWN9nuJODs0"
+                            Name = "One Way to rock",
+                            VideoUrl = "https://www.dropbox.com/scl/fi/zq9ieuxymrsj5hah8n6x7/Video-Jul-19-2026-2-23-11-PM.mp4?rlkey=k2ecapfc1txigldxvis9qs1yz&st=of67g5ba&raw=1"
                         });
                 });
 
