@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DjECyGd9uXY=",
+  "dgSpecHash": "y7tnzG0Z0bk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\api\\Api.csproj",
+  "projectFilePath": "C:\\Users\\thedo\\source\\repos\\React and web Api\\Lenny\\APi\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thedo\\.nuget\\packages\\automapper\\16.2.0\\automapper.16.2.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -48,10 +48,7 @@
     "C:\\Users\\thedo\\.nuget\\packages\\system.composition.convention\\9.0.0\\system.composition.convention.9.0.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\system.composition.hosting\\9.0.0\\system.composition.hosting.9.0.0.nupkg.sha512",
     "C:\\Users\\thedo\\.nuget\\packages\\system.composition.runtime\\9.0.0\\system.composition.runtime.9.0.0.nupkg.sha512",
-    "C:\\Users\\thedo\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512",
-    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\10.0.9\\microsoft.netcore.app.runtime.linux-x64.10.0.9.nupkg.sha512",
-    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\10.0.9\\microsoft.aspnetcore.app.runtime.linux-x64.10.0.9.nupkg.sha512",
-    "C:\\Users\\thedo\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\10.0.9\\microsoft.netcore.app.host.linux-x64.10.0.9.nupkg.sha512"
+    "C:\\Users\\thedo\\.nuget\\packages\\system.composition.typedparts\\9.0.0\\system.composition.typedparts.9.0.0.nupkg.sha512"
   ],
   "logs": []
 }
