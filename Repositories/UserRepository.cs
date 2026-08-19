@@ -7,7 +7,7 @@ namespace ConfArch.Data.Repositories
     {
         private List<UserEntity> users = new()
         {
-            // AlfieAndHunter!
+            // AlfieAndHunter! is the password for the user below, hashed with SHA256
             new UserEntity(3522, "BentEnt", "oeHsJMHi9cmGeeV3Y+ED/w1uepLiuGULSAtsoH/eneI=", "blue", "Admin")
         };
 
