@@ -51,10 +51,20 @@ public class PicRepository : IPicRepository
 
     public async Task<List<PicDto>> GetAll()
     {
-        return await _context.Pics
-            .OrderBy(p => p.DisplayOrder)
-            .Select(p => new PicDto(p.Id, p.Filename, p.DisplayOrder))
-            .ToListAsync();
+        List<PicDto> picDtos = new List<PicDto>();
+        picDtos.Add(new PicDto(12, "don.JPEG", 6));
+        picDtos.Add(new PicDto(13, "dori.JPEG", 3));
+        picDtos.Add(new PicDto(14, "three.JPEG", 2));
+        picDtos.Add(new PicDto(18, "shades.JPEG", 5));
+        picDtos.Add(new PicDto(49, "beach.JPEG", 4));
+        picDtos.Add(new PicDto(51, "Photo Jul 31 2026, 8 45 25 PM.jpg", 1));
+
+        return picDtos;
+
+        // return await _context.Pics
+        //     .OrderBy(p => p.DisplayOrder)
+        //     .Select(p => new PicDto(p.Id, p.Filename, p.DisplayOrder))
+        //     .ToListAsync();
     }
 
     public Task<List<Pic>> GetAllSync()
