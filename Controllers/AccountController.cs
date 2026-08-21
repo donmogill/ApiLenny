@@ -28,7 +28,7 @@ namespace ConfArch.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            var user = userRepository.GetByUsernameAndPassword(model.Username, model.Password);
+            var user = await userRepository.GetByUsernameAndPassword(model.Username, model.Password);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");

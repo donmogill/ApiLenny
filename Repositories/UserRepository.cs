@@ -10,7 +10,7 @@ namespace ConfArch.Data.Repositories
         LennyDbContext _context;
         private readonly IMapper _mapper;
 
-        public UserRepository(LennyDbContext context, IMapper mapper`)
+        public UserRepository(LennyDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -25,7 +25,6 @@ namespace ConfArch.Data.Repositories
         public async Task<UserDto?> GetByUsernameAndPassword(string username, string password)
         {
             var hash = password.Sha256();
-            //var users = await GetAllUsers();
 
             var user = _context.Users
                 .Where(u => u.Name.ToLower() == username.ToLower() && u.Password == hash)
@@ -33,7 +32,6 @@ namespace ConfArch.Data.Repositories
 
             var userDto = _mapper.Map<UserDto>(user);
 
-            //var user = users.Where(u => u.Name.ToLower() == username.ToLower() && u.Password == hash).SingleOrDefault();
             return await Task.FromResult(userDto);
         }
     }
