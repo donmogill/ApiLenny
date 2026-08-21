@@ -1,4 +1,8 @@
-namespace WebApplication17.Dtos
+public class UserEntity
 {
-    public record UserEntity(int Id, string Name, string Password, string FavoriteColor, string Role);
+    public int Id { get; set; }
+    public required string Name { get; set; }
+    public required string Password { get; set; }
+    public required string FavoriteColor { get; set; }
+    public required string Role { get; set; }
 }

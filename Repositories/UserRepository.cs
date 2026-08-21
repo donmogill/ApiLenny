@@ -1,21 +1,40 @@
-using WebApplication17.Dtos;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConfArch.Data.Repositories
 {
     
     public class UserRepository : IUserRepository
     {
-        private List<UserEntity> users = new()
-        {
-            // AlfieAndHunter! is the password for the user below, hashed with SHA256
-            new UserEntity(3522, "BentEnt", "oeHsJMHi9cmGeeV3Y+ED/w1uepLiuGULSAtsoH/eneI=", "blue", "Admin")
-        };
 
-        public UserEntity? GetByUsernameAndPassword(string username, string password)
+        LennyDbContext _context;
+        private readonly IMapper _mapper;
+
+        public UserRepository(LennyDbContext context, IMapper mapper`)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
+        public async Task<List<UserEntity>> GetAllUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
+
+        public async Task<UserDto?> GetByUsernameAndPassword(string username, string password)
         {
             var hash = password.Sha256();
-            var user = users.SingleOrDefault(u => u.Name.ToLower() == username.ToLower() && u.Password == hash);
-            return user;
+            //var users = await GetAllUsers();
+
+            var user = _context.Users
+                .Where(u => u.Name.ToLower() == username.ToLower() && u.Password == hash)
+                .SingleOrDefault();
+
+            var userDto = _mapper.Map<UserDto>(user);
+
+            //var user = users.Where(u => u.Name.ToLower() == username.ToLower() && u.Password == hash).SingleOrDefault();
+            return await Task.FromResult(userDto);
         }
     }
 }

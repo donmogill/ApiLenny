@@ -14,6 +14,9 @@ public class ShowProfile : Profile
 
             CreateMap<Video, VideoDto>();
             CreateMap<VideoDto, Video>();
+
+            CreateMap<UserEntity, UserDto>();
+            CreateMap<UserDto, UserEntity>();
         }
     }
 

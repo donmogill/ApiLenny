@@ -7,6 +7,7 @@ public class LennyDbContext : DbContext
     public DbSet<Venue> Venues => Set<Venue>();
     public DbSet<Band> Bands => Set<Band>();
     public DbSet<Video> Videos => Set<Video>();
+    public DbSet<UserEntity> Users => Set<UserEntity>();
     
     public LennyDbContext(DbContextOptions<LennyDbContext> options)
         : base(options)
